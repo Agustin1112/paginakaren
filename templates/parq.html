@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuestionario PAR-Q</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/jpeg" href="/static/img/logo.jpg">
+  <style>
+    .fade-in {
+      animation: fadeIn 0.6s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-black text-white font-sans">
+
+  <!-- Contenedor principal -->
+  <div class="max-w-3xl mx-auto p-8 bg-gray-900 bg-opacity-70 rounded-2xl shadow-lg mt-10 mb-10 fade-in">
+    <div class="flex justify-center mb-6">
+      <img src="/static/img/logo.jpg" alt="Logo" class="h-20 w-20 rounded-full border-2 border-pink-400">
+    </div>
+
+    <h1 class="text-center text-3xl font-bold text-pink-400 mb-6">Cuestionario PAR-Q</h1>
+    <p class="text-center mb-8 text-gray-300">
+      Este cuestionario tiene como objetivo identificar posibles riesgos para tu salud antes de comenzar un programa de entrenamiento.  
+      Por favor, respondé con sinceridad.
+    </p>
+
+    <!-- Mensajes de Flask -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="text-center mb-4 fade-in">
+            <p class="p-3 rounded-lg {% if category == 'success' %}bg-green-600{% else %}bg-red-600{% endif %}">{{ message }}</p>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" id="parqForm" class="space-y-6">
+
+      <!-- Datos personales -->
+      <div class="grid sm:grid-cols-2 gap-4">
+        <input type="text" name="nombre" placeholder="Nombre completo" required
+               class="w-full p-3 bg-gray-800 text-white rounded-lg border border-pink-400 focus:outline-none">
+        <input type="number" name="edad" placeholder="Edad" required
+               class="w-full p-3 bg-gray-800 text-white rounded-lg border border-pink-400 focus:outline-none">
+      </div>
+
+      <!-- Campo Sexo -->
+      <div>
+        <label class="block mb-2 text-pink-400 font-semibold">Sexo</label>
+        <select name="sexo" required
+                class="w-full p-3 bg-gray-800 text-white rounded-lg border border-pink-400 focus:outline-none">
+          <option value="" disabled selected>Seleccioná una opción</option>
+          <option value="Femenino">Femenino</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Otro">Otro / Prefiero no decir</option>
+        </select>
+      </div>
+
+      <input type="text" name="profesion" placeholder="Profesión"
+             class="w-full p-3 bg-gray-800 text-white rounded-lg border border-pink-400 focus:outline-none">
+
+      <!-- Preguntas PAR-Q -->
+      <h2 class="text-xl font-semibold text-pink-400 mt-10 mb-4 text-center">Preguntas de Salud</h2>
+
+      {% set preguntas = [
+        '¿Alguna vez tu médico te dijo que tenés un problema cardíaco y que solo deberías realizar actividad física recomendada por un profesional?',
+        '¿Sentís dolor en el pecho cuando realizás actividad física?',
+        '¿Tuviste dolor en el pecho en el último mes cuando no estabas haciendo actividad física?',
+        '¿Perdés el equilibrio a causa de mareos o alguna vez perdiste el conocimiento?',
+        '¿Tenés algún problema óseo o articular que pudiera agravarse con el ejercicio?',
+        '¿Tu médico actualmente te prescribe medicamentos (por ejemplo, pastillas para el corazón o la presión)?',
+        '¿Conocés alguna otra razón por la cual no deberías realizar actividad física?'
+      ] %}
+
+      {% for i in range(1, 8) %}
+      <div class="bg-gray-800 p-4 rounded-lg border border-pink-400">
+        <p class="mb-3">{{ i }}. {{ preguntas[i-1] }}</p>
+        <div class="flex gap-6">
+          <label class="inline-flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" name="q{{ i }}_si"
+                   class="appearance-none h-5 w-5 border-2 border-pink-400 rounded-md checked:bg-pink-400 transition">
+            <span>Sí</span>
+          </label>
+          <label class="inline-flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" name="q{{ i }}_no"
+                   class="appearance-none h-5 w-5 border-2 border-pink-400 rounded-md checked:bg-pink-400 transition">
+            <span>No</span>
+          </label>
+        </div>
+      </div>
+      {% endfor %}
+
+      <!-- Campos adicionales -->
+      <textarea name="disponibilidad" placeholder="Disponibilidad horaria"
+                class="w-full p-3 bg-gray-800 text-white rounded-lg border border-pink-400 focus:outline-none"></textarea>
+
+      <textarea name="objetivos" placeholder="Objetivos personales (bajar de peso, tonificar, fuerza, etc.)"
+                class="w-full p-3 bg-gray-800 text-white rounded-lg border border-pink-400 focus:outline-none"></textarea>
+
+      <textarea name="otras_actividades" placeholder="¿Realizás otras actividades físicas?"
+                class="w-full p-3 bg-gray-800 text-white rounded-lg border border-pink-400 focus:outline-none"></textarea>
+
+      <textarea name="lesiones" placeholder="Lesiones o condiciones médicas relevantes"
+                class="w-full p-3 bg-gray-800 text-white rounded-lg border border-pink-400 focus:outline-none"></textarea>
+
+      <textarea name="peso_estatura" placeholder="Peso y estatura actual"
+                class="w-full p-3 bg-gray-800 text-white rounded-lg border border-pink-400 focus:outline-none"></textarea>
+
+      <textarea name="observaciones" placeholder="Observaciones adicionales"
+                class="w-full p-3 bg-gray-800 text-white rounded-lg border border-pink-400 focus:outline-none"></textarea>
+
+      <input type="text" name="firma" placeholder="Firma (nombre completo)"
+             class="w-full p-3 bg-gray-800 text-white rounded-lg border border-pink-400 focus:outline-none">
+
+      <!-- Botones -->
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
+        <button type="submit"
+                class="bg-pink-400 hover:bg-pink-500 text-black font-bold py-3 px-8 rounded-lg transition duration-300">
+          Enviar Formulario
+        </button>
+        <a href="/" class="border-2 border-pink-400 hover:bg-pink-400 text-pink-400 hover:text-black font-bold py-3 px-8 rounded-lg transition duration-300">
+          Volver al Inicio
+        </a>
+      </div>
+    </form>
+
+    <!-- Mensaje de éxito -->
+    <div id="successMessage" class="hidden text-center mt-8 bg-green-600 text-white p-4 rounded-lg fade-in">
+      ✅ ¡Formulario enviado con éxito! Gracias por completar el cuestionario.
+    </div>
+  </div>
+
+  <footer class="text-center text-gray-400 py-6">
+    <p>&copy; 2025 KarenEntrenadora. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Mensaje animado JS -->
+  <script>
+    const form = document.getElementById("parqForm");
+    const successMessage = document.getElementById("successMessage");
+
+    form.addEventListener("submit", (e) => {
+      successMessage.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>

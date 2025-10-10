@@ -1,0 +1,48 @@
+/* Colores principales */
+:root {
+  --fondo: #000000;
+  --rosado: #ffb6c1;
+  --texto: #ffffff;
+}
+
+/* Estilo general */
+body {
+  background-color: var(--fondo);
+  color: var(--texto);
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+a {
+  color: var(--rosado);
+}
+
+a:hover {
+  color: #ffc6d6;
+}
+
+button, .btn {
+  background-color: var(--rosado);
+  color: var(--fondo);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover, .btn:hover {
+  background-color: #ffc6d6;
+}
+
+input, textarea {
+  background-color: #111;
+  color: var(--texto);
+  border: 1px solid #333;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+p, h1, h2, h3, h4, h5, h6, li {
+  color: var(--texto);
+}
+
+  

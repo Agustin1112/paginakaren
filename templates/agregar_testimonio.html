@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agregar Testimonio - KarenEntrenadora</title>
+  <link rel="icon" type="image/jpeg" href="/static/img/logo.jpg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --kcPink: #f472b6;
+      --kcBlack: #000000;
+    }
+
+    body {
+      background-color: var(--kcBlack);
+      color: white;
+    }
+
+    .kc-title {
+      font-family: 'Great Vibes', cursive;
+      color: var(--kcPink);
+    }
+
+    .kc-button {
+      background-color: var(--kcPink);
+      color: var(--kcBlack);
+      font-weight: bold;
+    }
+
+    .kc-button:hover {
+      background-color: #e6579b;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4">
+
+  <div class="w-full max-w-xl bg-gray-900 p-8 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold text-center mb-6 kc-title">Dejá tu testimonio ❤️</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="mb-4 px-4 py-2 rounded text-sm font-semibold 
+            {% if category == 'error' %}bg-red-600
+            {% elif category == 'success' %}bg-green-600
+            {% else %}bg-blue-600{% endif %}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+      <div class="mb-4">
+        <label for="nombre" class="block text-sm mb-2">Tu nombre</label>
+        <input type="text" id="nombre" name="nombre"
+               class="w-full px-4 py-2 rounded bg-black border border-gray-700 text-white" required>
+      </div>
+      <div class="mb-4">
+        <label for="mensaje" class="block text-sm mb-2">Tu mensaje</label>
+        <textarea id="mensaje" name="mensaje" rows="5"
+                  class="w-full px-4 py-2 rounded bg-black border border-gray-700 text-white" required></textarea>
+      </div>
+      <button type="submit" class="kc-button w-full py-2 rounded transition">
+        Enviar testimonio
+      </button>
+    </form>
+
+    <div class="mt-4 text-center">
+      <a href="/testimonios" class="text-pink-400 hover:underline text-sm">← Volver a testimonios</a>
+    </div>
+  </div>
+
+</body>
+</html>

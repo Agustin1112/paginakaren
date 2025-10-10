@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Nuevo Cuestionario PAR-Q</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+      padding: 0;
+      margin: 0;
+    }
+    .container {
+      max-width: 700px;
+      margin: 30px auto;
+      background-color: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .header {
+      background-color: #f472b6;
+      text-align: center;
+      padding: 30px 20px 15px;
+    }
+    .header img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+    }
+    .header h1 {
+      color: #ffffff;
+      font-size: 26px;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+    .content {
+      padding: 30px;
+    }
+    h2 {
+      color: #f472b6;
+      border-bottom: 2px solid #f472b6;
+      padding-bottom: 6px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    .question {
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 12px 15px;
+      margin-bottom: 10px;
+    }
+    .question strong {
+      color: #000;
+    }
+    .footer {
+      text-align: center;
+      background-color: #f9f9f9;
+      border-top: 1px solid #eee;
+      padding: 15px;
+      font-size: 13px;
+      color: #666;
+    }
+    .footer a {
+      color: #f472b6;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Encabezado -->
+    <div class="header">
+      <img src="{{ url_for('static', filename='img/logo.jpg', _external=True) }}" alt="Logo KarenEntrenadora">
+      <h1>KarenEntrenadora</h1>
+    </div>
+
+    <!-- Contenido -->
+    <div class="content">
+      <h2>Datos Personales</h2>
+      <p><strong>Nombre:</strong> {{ nombre }}</p>
+      <p><strong>Edad:</strong> {{ edad }}</p>
+      <p><strong>Sexo:</strong> {{ sexo }}</p>
+      <p><strong>Profesión:</strong> {{ profesion }}</p>
+
+      <h2>Respuestas PAR-Q</h2>
+
+      {% set preguntas = [
+        '¿Alguna vez tu médico te dijo que tenés un problema cardíaco y que solo deberías realizar actividad física recomendada por un profesional?',
+        '¿Sentís dolor en el pecho cuando realizás actividad física?',
+        '¿Tuviste dolor en el pecho en el último mes cuando no estabas haciendo actividad física?',
+        '¿Perdés el equilibrio a causa de mareos o alguna vez perdiste el conocimiento?',
+        '¿Tenés algún problema óseo o articular que pudiera agravarse con el ejercicio?',
+        '¿Tu médico actualmente te prescribe medicamentos (por ejemplo, pastillas para el corazón o la presión)?',
+        '¿Conocés alguna otra razón por la cual no deberías realizar actividad física?'
+      ] %}
+
+      {% for i, respuesta in respuestas %}
+        <div class="question">
+          <strong>{{ i }}. {{ preguntas[i-1] }}</strong><br>
+          <span style="color:#d63384;"><strong>Respuesta:</strong> {{ respuesta }}</span>
+        </div>
+      {% endfor %}
+
+      <h2>Información Adicional</h2>
+      <p><strong>Disponibilidad horaria:</strong> {{ disponibilidad }}</p>
+      <p><strong>Objetivos personales:</strong> {{ objetivos }}</p>
+      <p><strong>Otras actividades:</strong> {{ otras_actividades }}</p>
+      <p><strong>Lesiones o condiciones médicas:</strong> {{ lesiones }}</p>
+      <p><strong>Peso y estatura:</strong> {{ peso_estatura }}</p>
+      <p><strong>Observaciones adicionales:</strong> {{ observaciones }}</p>
+
+      <h2>Firma</h2>
+      <p>{{ firma }}</p>
+    </div>
+
+    <!-- Pie -->
+    <div class="footer">
+      <p>Formulario enviado automáticamente desde <strong>KarenEntrenadora</strong>.</p>
+      <p><a href="https://www.instagram.com/karen_entrenadora" target="_blank">@karen_entrenadora</a></p>
+    </div>
+  </div>
+</body>
+</html>
