@@ -86,7 +86,7 @@
       {% if imagenes %}
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {% for img in imagenes %}
-          <img src="{{ img }}" alt="Resultado {{ loop.index }}" class="w-full h-auto rounded-lg shadow-lg">
+          <img src="{{img[1]}}" alt="Resultado {{img[0]}}" class="w-full h-auto rounded-lg shadow-lg">
         {% endfor %}
       </div>
       {% else %}
