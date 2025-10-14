@@ -61,8 +61,8 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {% for img in imagenes %}
         <div class="relative">
-          <img src="{{ img }}" class="w-full h-auto rounded-lg shadow">
-          <form method="POST" action="/admin/galeria/eliminar/{{ loop.index0 }}" class="absolute top-2 right-2">
+          <img src="{{img[1]}}" class="w-full h-auto rounded-lg shadow">
+          <form method="POST" action="/admin/galeria/eliminar/{{img[0]}}" class="absolute top-2 right-2">
             <button type="submit" class="bg-red-600 text-white p-2 rounded-full hover:bg-red-700" title="Eliminar">
               <i class="fas fa-trash"></i>
             </button>
