@@ -8,8 +8,17 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/static/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+  </style>
 </head>
-<body class="flex flex-col bg-black text-white transition duration-300 min-h-screen lg:h-full lg:min-h-full max-[1024px]:m-0">
+<body class="flex flex-col bg-black text-white transition duration-300 min-h-screen">
 
   <!-- Navbar -->
   <nav class="bg-pink-400 text-black shadow-lg sticky top-0 z-50">
@@ -36,71 +45,108 @@
 
       <!-- Menú -->
       <div class="hidden w-full xl:block xl:w-auto" id="menu">
-        <ul class="font-medium flex flex-col items-center justify-center p-4 md:p-0 mt-4 bg-transparent xl:flex-row xl:space-x-8 rtl:space-x-reverse md:mt-0">
-          <li>
-            <a href="/" class="block py-2 px-3 text-gray-900 text-base font-semibold rounded-sm hover:text-white">Inicio</a>
-          </li>
-          <li>
-            <a href="/about" class="block py-2 px-3 text-gray-900 text-base font-semibold rounded-sm hover:text-white">Sobre mí</a>
-          </li>
-          <li>
-            <a href="/services" class="block py-2 px-3 text-gray-900 text-base font-semibold rounded-sm hover:text-white">Programas</a>
-          </li>
-          <li>
-            <a href="/contact" class="block py-2 px-3 text-gray-900 text-base font-semibold rounded-sm hover:text-white">Contacto</a>
-          </li>
-          <li>
-            <a href="/testimonios" class="block py-2 px-3 text-gray-900 text-base font-semibold rounded-sm hover:text-white">Testimonios</a>
-          </li>
-          <li>
-            <a href="/resultados" class="block py-2 px-3 text-gray-900 text-base font-semibold rounded-sm hover:text-white">Resultados</a>
-          </li>
-          <li>
-            <a href="/faq" class="block py-2 px-3 text-gray-900 text-base font-semibold rounded-sm hover:text-white">Preguntas</a>
-          </li>
+        <ul class="font-medium flex flex-col items-center justify-center p-4 md:p-0 mt-4 bg-transparent xl:flex-row xl:space-x-8 md:mt-0">
+          <li><a href="/" class="block py-2 px-3 text-gray-900 text-base font-semibold rounded-sm hover:text-white">Inicio</a></li>
+          <li><a href="/about" class="block py-2 px-3 text-gray-900 text-base font-semibold rounded-sm hover:text-white">Sobre mí</a></li>
+          <li><a href="/services" class="block py-2 px-3 text-gray-900 text-base font-semibold rounded-sm hover:text-white">Programas</a></li>
+          <li><a href="/contact" class="block py-2 px-3 text-gray-900 text-base font-semibold rounded-sm hover:text-white">Contacto</a></li>
+          <li><a href="/testimonios" class="block py-2 px-3 text-gray-900 text-base font-semibold rounded-sm hover:text-white">Testimonios</a></li>
+          <li><a href="/resultados" class="block py-2 px-3 text-gray-900 text-base font-semibold rounded-sm hover:text-white">Resultados</a></li>
+          <li><a href="/faq" class="block py-2 px-3 text-gray-900 text-base font-semibold rounded-sm hover:text-white">Preguntas</a></li>
           {% if session.autorizado %}
-            <li>
-              <a href="/admin/galeria" class="block py-2 px-3 text-yellow-300 text-base font-semibold rounded-sm hover:text-yellow-400">Administrar galería</a>
-            </li>
+          <li>
+            <a href="/admin/galeria" class="block py-2 px-3 text-yellow-300 text-base font-semibold rounded-sm hover:text-yellow-400">
+              Administrar galería
+            </a>
+          </li>
           {% endif %}
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Servicios -->
-  <section class="max-[1024px]:flex-1 container mx-auto px-6 py-16 lg:h-screen">
-    <h1 class="text-4xl font-bold mb-10 text-rose-300 text-center">Planes adaptados a ti</h1>
-    <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center justify-center gap-8 lg:min-h-[75%]">
-      <div class="bg-gray-900 p-6 rounded-lg shadow-md text-white text-center">
-        <i class="fas fa-dumbbell text-pink-400 text-3xl mb-4"></i>
+  <!-- Servicios principales -->
+  <section class="container mx-auto px-6 py-16">
+    <h1 class="text-4xl font-bold mb-10 text-rose-300 text-center fade-in-up">Planes adaptados a ti</h1>
+    <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="bg-gray-900 p-6 rounded-lg shadow-md text-center transform hover:scale-105 transition duration-300 fade-in-up">
+        <i class="fas fa-dumbbell text-pink-400 text-4xl mb-4"></i>
         <h2 class="text-xl font-semibold mb-2">Entrenamiento Personalizado</h2>
         <p>✔ Rutina adaptada<br>✔ Seguimiento 1 a 1<br>✔ Resultados medibles</p>
       </div>
-      <div class="bg-gray-900 p-6 rounded-lg shadow-md text-white text-center">
-        <i class="fas fa-users text-pink-400 text-3xl mb-4"></i>
+      <div class="bg-gray-900 p-6 rounded-lg shadow-md text-center transform hover:scale-105 transition duration-300 fade-in-up" style="animation-delay: 0.1s">
+        <i class="fas fa-users text-pink-400 text-4xl mb-4"></i>
         <h2 class="text-xl font-semibold mb-2">Clases Grupales</h2>
         <p>✔ Energía grupal<br>✔ Horarios flexibles<br>✔ Diversión garantizada</p>
       </div>
-      <div class="bg-gray-900 p-6 rounded-lg shadow-md text-white text-center">
-        <i class="fas fa-apple-alt text-pink-400 text-3xl mb-4"></i>
+      <div class="bg-gray-900 p-6 rounded-lg shadow-md text-center transform hover:scale-105 transition duration-300 fade-in-up" style="animation-delay: 0.2s">
+        <i class="fas fa-apple-alt text-pink-400 text-4xl mb-4"></i>
         <h2 class="text-xl font-semibold mb-2">Asesoría Nutricional</h2>
-        <p>✔ Plan alimenticio<br>✔ Educación nutricional<br>✔ Seguimiento</p>
+        <p>✔ Plan alimenticio<br>✔ Educación nutricional<br>✔ Seguimiento personalizado</p>
       </div>
-      <div class="bg-gray-900 p-6 rounded-lg shadow-md text-white text-center">
-        <i class="fas fa-laptop-house text-pink-400 text-3xl mb-4"></i>
+      <div class="bg-gray-900 p-6 rounded-lg shadow-md text-center transform hover:scale-105 transition duration-300 fade-in-up" style="animation-delay: 0.3s">
+        <i class="fas fa-laptop-house text-pink-400 text-4xl mb-4"></i>
         <h2 class="text-xl font-semibold mb-2">Plan Online</h2>
         <p>✔ Acceso virtual<br>✔ Planes semanales<br>✔ Soporte por WhatsApp</p>
       </div>
     </div>
   </section>
 
+  <!-- Planes Detallados -->
+  <section class="bg-black text-white py-16 px-6 border-t border-pink-400">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl font-bold text-pink-400 mb-12 fade-in-up">Planes y Precios</h2>
+
+      <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div class="bg-gray-900 border border-pink-400 rounded-2xl p-8 shadow-lg hover:scale-105 transition-transform hover:shadow-pink-500/40 fade-in-up">
+          <i class="fas fa-heartbeat text-pink-400 text-4xl mb-4"></i>
+          <h3 class="text-2xl font-bold text-pink-300 mb-4">Online plan de alimentación + entrenamiento</h3>
+          <p class="text-4xl font-bold mb-4">$2800</p>
+          <p class="text-gray-300 mb-6">Plan online completo con seguimiento personalizado y asesoramiento constante.</p>
+          <a href="/contact" class="bg-pink-400 hover:bg-pink-500 text-black font-bold py-2 px-6 rounded-lg transition">Elegir plan</a>
+        </div>
+
+        <div class="bg-gray-900 border border-pink-400 rounded-2xl p-8 shadow-lg hover:scale-105 transition-transform hover:shadow-pink-500/40 fade-in-up" style="animation-delay: 0.1s">
+          <i class="fas fa-apple-alt text-pink-400 text-4xl mb-4"></i>
+          <h3 class="text-2xl font-bold text-pink-300 mb-4">Plan de alimentación</h3>
+          <p class="text-4xl font-bold mb-4">$1900</p>
+          <p class="text-gray-300 mb-6">Asesoría nutricional personalizada para mejorar tus hábitos y alcanzar tus metas.</p>
+          <a href="/contact" class="bg-pink-400 hover:bg-pink-500 text-black font-bold py-2 px-6 rounded-lg transition">Elegir plan</a>
+        </div>
+
+        <div class="bg-gray-900 border border-pink-400 rounded-2xl p-8 shadow-lg hover:scale-105 transition-transform hover:shadow-pink-500/40 fade-in-up" style="animation-delay: 0.2s">
+          <i class="fas fa-dumbbell text-pink-400 text-4xl mb-4"></i>
+          <h3 class="text-2xl font-bold text-pink-300 mb-4">Entrenamiento presencial (2 veces/semana)</h3>
+          <p class="text-4xl font-bold mb-4">$4000</p>
+          <p class="text-gray-300 mb-6">Entrenamientos personalizados presenciales dos veces por semana.</p>
+          <a href="/contact" class="bg-pink-400 hover:bg-pink-500 text-black font-bold py-2 px-6 rounded-lg transition">Elegir plan</a>
+        </div>
+
+        <div class="bg-gray-900 border border-pink-400 rounded-2xl p-8 shadow-lg hover:scale-105 transition-transform hover:shadow-pink-500/40 fade-in-up" style="animation-delay: 0.3s">
+          <i class="fas fa-running text-pink-400 text-4xl mb-4"></i>
+          <h3 class="text-2xl font-bold text-pink-300 mb-4">Entrenamiento presencial (3 veces/semana)</h3>
+          <p class="text-4xl font-bold mb-4">$5000</p>
+          <p class="text-gray-300 mb-6">Ideal para quienes buscan compromiso y resultados sostenidos.</p>
+          <a href="/contact" class="bg-pink-400 hover:bg-pink-500 text-black font-bold py-2 px-6 rounded-lg transition">Elegir plan</a>
+        </div>
+
+        <div class="bg-gray-900 border border-pink-400 rounded-2xl p-8 shadow-lg hover:scale-105 transition-transform hover:shadow-pink-500/40 fade-in-up" style="animation-delay: 0.4s">
+          <i class="fas fa-fire text-pink-400 text-4xl mb-4"></i>
+          <h3 class="text-2xl font-bold text-pink-300 mb-4">Entrenamiento presencial (5 veces/semana)</h3>
+          <p class="text-4xl font-bold mb-4">$7000</p>
+          <p class="text-gray-300 mb-6">Entrenamiento intensivo para alcanzar tu máximo potencial físico y mental.</p>
+          <a href="/contact" class="bg-pink-400 hover:bg-pink-500 text-black font-bold py-2 px-6 rounded-lg transition">Elegir plan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white min-h-32 py-6 text-center">
+  <footer class="bg-gray-800 text-white py-6 text-center">
     <div class="flex justify-center items-center space-x-4 mb-2">
-      <a href="https://www.instagram.com/karen_entrenadora" 
-         target="_blank" 
-         class="text-pink-400 hover:text-pink-500 transition" 
+      <a href="https://www.instagram.com/karen_entrenadora"
+         target="_blank"
+         class="text-pink-400 hover:text-pink-500 transition"
          aria-label="Instagram">
         <i class="fab fa-instagram text-2xl"></i>
       </a>
@@ -120,41 +166,8 @@
     const menu = document.getElementById("menu");
     const menuToggle = document.getElementById("menu-toggle");
     const navbar = document.getElementById("navbar");
-
-    menuToggle.addEventListener("click", () => {
-      menu.classList.toggle("hidden");
-    });
-
-    window.addEventListener("click", (event) => {
-      if (!navbar.contains(event.target)) {
-        menu.classList.add("hidden");
-      }
-    });
-
-    const body = document.body;
-    const icon = document.getElementById("theme-icon");
-    const savedTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-
-    function setTheme(mode) {
-      if (mode === "dark") {
-        body.classList.add("bg-black", "text-white");
-        body.classList.remove("bg-light", "text-light");
-        icon.classList.replace("fa-sun", "fa-moon");
-      } else {
-        body.classList.add("bg-light", "text-light");
-        body.classList.remove("bg-black", "text-white");
-        icon.classList.replace("fa-moon", "fa-sun");
-      }
-    }
-
-    setTheme(savedTheme);
-
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-      const current = body.classList.contains("bg-black") ? "dark" : "light";
-      const next = current === "dark" ? "light" : "dark";
-      localStorage.setItem("theme", next);
-      setTheme(next);
-    });
+    menuToggle.addEventListener("click", () => menu.classList.toggle("hidden"));
+    window.addEventListener("click", (e) => { if (!navbar.contains(e.target)) menu.classList.add("hidden"); });
   </script>
 
 </body>
